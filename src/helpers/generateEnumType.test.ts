@@ -9,7 +9,7 @@ test("it generates the enum type", () => {
     { name: "BAR", dbName: "BAR" },
   ]);
 
-  const printer = createPrinter();
+  const printer = createPrinter({ newLine: ts.NewLineKind.LineFeed });
 
   const result = printer.printList(
     ts.ListFormat.MultiLine,

@@ -1,7 +1,7 @@
 import ts, { createPrinter } from "typescript";
 
 export const stringifyTsNode = (node: ts.Node) => {
-  return createPrinter().printNode(
+  return createPrinter({ newLine: ts.NewLineKind.LineFeed }).printNode(
     ts.EmitHint.Unspecified,
     node,
     ts.factory.createSourceFile(
