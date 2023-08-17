@@ -16,13 +16,19 @@ const defaultTypesImplementedInJS = ["cuid", "uuid"];
 
 export const generateModel = (model: DMMF.Model, config: Config) => {
   const properties = model.fields.flatMap((field) => {
-    const isGenerated =
+    const isGenerated_default =
       field.hasDefaultValue &&
       !(
         typeof field.default === "object" &&
         "name" in field.default &&
         defaultTypesImplementedInJS.includes(field.default.name)
       );
+
+    // https://github.com/valtyr/prisma-kysely/issues/59
+    // "Is Prisma's @updatedAt supported?" is rejected issue, but useful for me.
+    const isGenerated_updatedAt = Boolean(field.isUpdatedAt);
+
+    const isGenerated = isGenerated_default || isGenerated_updatedAt;
 
     const typeOverride = field.documentation
       ? generateTypeOverrideFromDocumentation(field.documentation)

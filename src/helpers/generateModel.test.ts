@@ -82,6 +82,19 @@ test("it generates a model!", () => {
           isRequired: true,
           isUnique: false,
         },
+        {
+          name: 'updatedAtField',
+          isId: false,
+          isGenerated: false,
+          kind: 'scalar',
+          type: 'DateTime',
+          hasDefaultValue: false,
+          isList: false,
+          isReadOnly: false,
+          isRequired: true,
+          isUnique: false,
+          isUpdatedAt: true,
+        }
       ],
       primaryKey: null,
       uniqueFields: [],
@@ -107,6 +120,7 @@ test("it generates a model!", () => {
     id2: Generated<string>;
     name: string | null;
     enumField: CoolEnum;
+    updatedAtField: Generated<string>;
 };`);
 });
 
