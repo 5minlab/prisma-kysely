@@ -25,6 +25,11 @@ export const generateFile = (
 export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
   ? ColumnType<S, I | undefined, U>
   : ColumnType<T, T | undefined, T>;
+export type JsonArray = JsonValue[];
+export type JsonObject = { [K in string]?: JsonValue; };
+export type JsonPrimitive = boolean | null | number | string;
+export type JsonValue = JsonArray | JsonObject | JsonPrimitive;
+export type Json = ColumnType<JsonValue, string, string>;
 export type Timestamp = ColumnType<Date, Date | string, Date | string>;`;
 
   if (withEnumImport) {
